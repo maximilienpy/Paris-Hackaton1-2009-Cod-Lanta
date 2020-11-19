@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: root
@@ -14,12 +13,16 @@ use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
+/**
+ *
+ */
 abstract class AbstractController
 {
     /**
      * @var Environment
      */
-    protected Environment $twig;
+    protected $twig;
+
 
     /**
      *  Initializes this class.
@@ -30,7 +33,7 @@ abstract class AbstractController
         $this->twig = new Environment(
             $loader,
             [
-                'cache' => !APP_DEV, // @phpstan-ignore-line
+                'cache' => !APP_DEV,
                 'debug' => APP_DEV,
             ]
         );

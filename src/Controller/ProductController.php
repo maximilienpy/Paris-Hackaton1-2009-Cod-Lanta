@@ -52,8 +52,7 @@ class ProductController extends AbstractController
 
 
         return $this->twig->render('Product/show.html.twig', [
-            'product' => $product,
-            ]);
+            'product' => $product]);
     }
 
 
@@ -73,17 +72,13 @@ class ProductController extends AbstractController
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $activated = isset($_POST['is_activated']) ? true : false;
             $product = [
-                'id' => $_POST['id'],
                 'name' => $_POST['name'],
-                'description' => $_POST['description'],
-                'category_id' => $_POST['category_id'],
-                'size_id' => $_POST['size_id'],
-                'price' => $_POST['price'],
+                'function' => $_POST['function'],
                 'quantity' => $_POST['quantity'],
-                'is_activated' => $activated,
-                'artist_id' => $_POST['artist_id'],
+                'picture' => $_POST['picture'],
+                'durability' => $_POST['durabilty'],
+                'owner_id' => $_POST['owner_id'],
             ];
 
             $productManager->update($product);
@@ -93,7 +88,7 @@ class ProductController extends AbstractController
         return $this->twig->render('Product/edit.html.twig', [
             'product' => $product,
 
-        ]
+        ]);
 
           
     /**
@@ -111,7 +106,6 @@ class ProductController extends AbstractController
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $activated = isset($_POST['is_activated']) ? true : false;
             $productManager = new ProductManager();
             $product = [
                 'name' => $_POST['name'],
@@ -119,8 +113,6 @@ class ProductController extends AbstractController
                 'quantity' => $_POST['quantity'],
                 'picture' => $_POST['picture'],
                 'durability' => $_POST['durabilty'],
-                'quantity' => $_POST['quantity'],
-                'is_activated' => $activated,
                 'owner_id' => $_POST['owner_id'],
             ];
             $id = $productManager->insert($product);

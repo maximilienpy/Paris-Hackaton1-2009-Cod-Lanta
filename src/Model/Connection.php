@@ -24,6 +24,7 @@ use PDOException;
  *  $conn = $db->getPdoConnection();
  * </pre>
  */
+
 class Connection
 {
     private PDO $pdoConnection;

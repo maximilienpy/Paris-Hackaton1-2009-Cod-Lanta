@@ -3,6 +3,6 @@
 {% block content %}
     <h1>Edit product {{ product.name }}</h1>
     {% include 'Product/_form.html.twig' %}
-    <a href="/product/index" class="btn btn-sm my-2 back-color"><i class="fas fa-list"></i> Return to the list</a><br>
-    <a href="/product/show/{{ product.id }}" class="btn btn-sm my-2 back-color">Back</a>
+    <a href="/product/index" class="btn"><i class="fas fa-list"></i> Return to the list</a><br>
+    <a href="/product/show/{{ product.id }}" class="btn" >Back</a>
 {% endblock %}

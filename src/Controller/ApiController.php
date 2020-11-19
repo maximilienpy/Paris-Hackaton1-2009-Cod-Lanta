@@ -18,18 +18,18 @@ class ApiController extends AbstractController
         $productManager = new ProductManager();
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             try{
-                $product = [
+                $product[
                     'name' = $_POST['name'],
                     'function' = $_POST['function'],
                     'quantity' = $_POST['quantity'],
                     'picture' = $_POST['picture'],
                     'durability' = $_POST['durability'],
                     'owner_id' = $_POST['owner_id']
-                ];
+                ],
                 $id = $prodcutManager->insert($product);
                 return json_encode($id, 255);
-            } catch (Exception $e) {
-                return json_encode($e->getMesssage());  
+            } catch (Exception $e) { 
+                return json_encode($e->getMesssage()); 
             }
         }
     }
@@ -61,8 +61,8 @@ class ApiController extends AbstractController
     {
         $productManager = new ProductManager();
         try{
-            $articleManger->delete($id);
-            return json-encode($id." deleted", 255);
+            $productManager->delete($id);
+            return json_encode($id." deleted", 255);
         } catch (exception $e) {
             return json_encode($e->getMessage());
         }

@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="twig-content"
+    {% include 'Product/_form.html.twig' %}
+    <div class="text-right">
+        <a href="/product/show/{{ product.id }}">Back</a>
+    </div>
+</div>
+{% endblock %}

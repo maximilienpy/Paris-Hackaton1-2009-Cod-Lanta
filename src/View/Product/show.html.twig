@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="card m-auto">
+
+    <div class="card-body">
+        {% for products in product %}  
+        <p><img src="{{product.pictures[0].url}}"></p>
+        <h5 class="card-title">{{ product.name }}</h5>
+       
+        <p class="card-text">function : {{product.function}}</p>
+        <p class="card-text"> quantity : {{product.quantity_name}}</p>
+        <p class="card-text">durability : {{product.durability_number}}</p>
+        <p><img src="{{product.picture}}"></p>
+    </div>
+    
+    <div class="card-footer text-center">
+        <a href="/product/edit/{{ product.id }}" class="btn btn-sm btn-warning my-2"><i class="fas fa-edit"></i></a>
+        <a href="/product/delete/{{ product.id }}" class="btn btn-sm btn-danger my-2"><i class="fas fa-trash"></i></a>
+    </div>
+</div>
+
+{% endblock %}

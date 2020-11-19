@@ -80,15 +80,14 @@ class ProductManager extends AbstractManager
             $products = $this->pdo->query("SELECT
             product.id,
             product.name,
-            product.function
+            product.function,
             product.quantity,
             product.picture,
-            product.durability,
-            product.owner_id,
-            
-            
+            product.durability
+            owner.firstname as owner_firstname, 
+            owner.lastname as owner_lastname
             FROM product
-            INNER JOIN exchange ON product.exchange_id=product.id ")->fetchAll();
+            INNER JOIN owner ON product.id=product.owner_id")->fetchAll();
             
             return $this->getProductsPictures($products);
             ////INNER JOIN a voir avec ali
@@ -103,16 +102,11 @@ class ProductManager extends AbstractManager
         product.name,
         product.function,
         product.quantity,
-        product.category_id,
-        product.size_id,
-        product.price,
-        product.activated,
-        product.function,
-        category.name as category_name,
-        size.number as size_number
+        product.picture,
+        product.durability,
+        product.owner-id
         FROM $this->table
-        INNER JOIN category ON product.category_id=category.id
-        INNER JOIN size ON product.size_id=size.id
+        INNER JOIN exchange ON product.exchange_id=product.id
         WHERE product.id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

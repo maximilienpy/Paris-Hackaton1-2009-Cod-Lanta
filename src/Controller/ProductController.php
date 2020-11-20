@@ -68,7 +68,7 @@ class ProductController extends AbstractController
     public function edit(int $id): string
     {
         $productManager= new ProductManager();
-        $product = $productManager->selectOneById($id);
+        $products = $productManager->selectOneById($id);
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -103,7 +103,6 @@ class ProductController extends AbstractController
     {
         $productManager = new ProductManager();
         $products = $productManager->selectAll();
-
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productManager = new ProductManager();

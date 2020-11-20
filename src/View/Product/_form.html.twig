@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+<form method="post">
+    <input type="hidden" value="{{ product.id }}" name="id">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" value="{{ product.name }}" name="name">
+    </div>
+    <div class="form-group">
+        <label for="function">function</label>
+        <input type="number" class="form-control" id="function" value="{{ product.function }}" name="function">
+    </div>
+    <div class="form-group">
+        <label for="quantity">quantity</label>
+        <input type="text" class="form-control" id="quantity" value="{{ product.quantity }}" name="quantity">
+    </div>
+        <div class="form-group">
+            <label for="picture">Picture</label>
+            <input type="text" class="form-control" id="picture" value="{{ picture.picture }}" name="picture">
+        </div>
+        <div class="form-group">
+            <label for="durability">durability</label>
+            <textarea type="text" class="form-control" id="durability" value="{{ product.durability }}" name="durability" rows="5" cols="33"></textarea>
+        </div>
+
+    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+  
+</form>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

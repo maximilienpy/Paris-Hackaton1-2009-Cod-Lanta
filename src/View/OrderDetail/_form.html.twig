@@ -1,0 +1,22 @@
+<form method="post">
+    {{dump(orderDetail)}}
+    <input type="hidden" value="{{ orderDetail.id }}" name="id">
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" class="form-control" id="quantity" value="{{ orderDetail.quantity }}" name="quantity">
+    </div>
+    <div class="form-group">
+        <label for="total">Total</label>
+        <input type="number" class="form-control" id="total" value="{{ orderDetail.total }}" name="total">
+    </div>
+    <div class="form-group">
+        <label for="order_id">Order ID</label>
+        <input type="number" class="form-control" id="order_id" value="{{ orderDetail.order_id }}" name="order_id">
+    </div>
+    
+    <div class="form-group">
+        <label for="product_id">Product ID</label>
+        <input type="number" class="form-control" id="product_id" value="{{ orderDetail.product_id }}" name="product_id">
+    </div>
+    <button type="submit" value="Valider" class="btn btn-primary">Submit</button>
+</form>

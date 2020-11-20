@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Controller;
+
+use App\Model\OwnerManager;
 use App\Model\ProductManager;
-use App\Model\PictureManager;
 /**
  * Class ProductController
  *
@@ -51,6 +52,8 @@ class ProductController extends AbstractController
     {
         $productManager = new ProductManager();
         $product = $productManager->selectOneWithDetails($id);
+        $ownerManager = new OwnerManager();
+        $owner = $ownerManager->selectAll();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $product = [
                 'id' => $_POST['id'],
@@ -65,7 +68,8 @@ class ProductController extends AbstractController
             header('Location:/product/show/' . $id);
         }
         return $this->twig->render('Product/edit.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'owner' => $owner
         ]);
     }
     /**
@@ -78,7 +82,27 @@ class ProductController extends AbstractController
      */
     public function add()
     {
- 
+        $ownerManager = new OwnerManager();
+        $owner = $ownerManager->selectAll();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $productManager = new productManager();
+            $product = [
+                'id' => $_POST['id'],
+                'name' => $_POST['name'],
+                'function' => $_POST['function'],
+                'quantity' => $_POST['quantity'],
+                'picture' => $_POST['picture'],
+                'durability' => $_POST['durability'],
+                'owner_id' => $_POST['owner_id'],
+            ];
+            $id = $productManager->insert($product);
+            header('Location:/product/show/' . $id);
+        }
+        return $this->twig->render('Product/add.html.twig', [
+            'product' => $product,
+            'owner' => $owner
+        ]);
+
     }
     /**
      * Handle product deletion

@@ -83,3 +83,4 @@ class OwnerManager extends AbstractManager
         return $statement->execute();
     }
 }
+

@@ -77,19 +77,18 @@ class ProductManager extends AbstractManager
     
     public function selectAllWithDetail(): array
     {
-            $products = $this->pdo->query("SELECT
-            product.id,
-            product.name,
-            product.function,
-            product.quantity,
-            product.picture,
-            product.durability
-            owner.firstname as owner_firstname, 
-            owner.lastname as owner_lastname
-            FROM product
-            INNER JOIN owner ON product.id=product.owner_id")->fetchAll();
+        $products = $this->pdo->query("SELECT
+        product.id,
+        product.name,
+        product.function,
+        product.quantity,
+        product.picture,
+        product.durability,
+        product.owner_id,
+        FROM $this->table
+        INNER JOIN owner ON product.owner_id=owner.id")->fetchAll();
             
-            return $this->getProductsPictures($products);
+            return $products;
             ////INNER JOIN a voir avec ali
     }
 
@@ -104,46 +103,17 @@ class ProductManager extends AbstractManager
         product.quantity,
         product.picture,
         product.durability,
-        product.owner-id
+        product.owner_id,
         FROM $this->table
-        INNER JOIN exchange ON product.exchange_id=product.id
+        INNER JOIN owner ON product.owner_id=owner.id
         WHERE product.id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         $product = $statement->fetch();
-
-        $statementImg = $this->pdo->prepare('SELECT url FROM picture WHERE product_id=:product_id');
-        $statementImg->bindValue('product_id', $id, \PDO::PARAM_INT);
-        $statementImg->execute();
-        $pictures = $statementImg->fetchAll();
-        $product['pictures'] = $pictures;
         return $product;
     }
 
   
 
      // PRIVATES METHODS
-    private function getPictures(array $product)
-    {
-        $statementImg = $this->pdo->prepare('SELECT url FROM picture WHERE product_id=:product_id');
-        $statementImg->bindValue('product_id', $product['id'], \PDO::PARAM_INT);
-        $statementImg->execute();
-
-        return $statementImg->fetchAll();
-    }
-
-    private function getProductsPictures(array $products)
-    {
-        $result = [];
-        foreach ($products as $product) {
-            $statementImg = $this->pdo->prepare('SELECT 
-            url FROM picture WHERE product_id=:product_id');
-            $statementImg->bindValue('product_id', $product['id'], \PDO::PARAM_INT);
-            $statementImg->execute();
-            $pictures = $statementImg->fetchAll();
-            $product['pictures'] = $pictures;
-            array_push($result, $product);
-        }
-        return $result;
-    }
 }
